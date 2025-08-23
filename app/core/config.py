@@ -1,0 +1,15 @@
+from pydantic import BaseSettings
+
+
+class Settings(BaseSettings):
+    SECRET_KEY: str
+
+    LOGLEVEL: str
+
+    DB_HOST: str
+    DB_PORT: str
+    DB_USERNAME: str
+    DB_PASSWORD: str
+
+    class Config:
+        env_file = ".env"
