@@ -36,6 +36,7 @@ class MuenzeRepository:
 
         self._session.commit()
         self._session.refresh(existing_muenze)
+
         return existing_muenze
 
     def delete(self, muenze_id: int) -> None:
