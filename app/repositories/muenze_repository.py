@@ -1,7 +1,7 @@
-from typing import Type
+from typing import Type, Optional
 from sqlalchemy.orm import Session
 
-from app.models import Muenze
+from app.models import Muenze, SerieMuenze
 
 
 class MuenzeRepository:
@@ -11,10 +11,16 @@ class MuenzeRepository:
     def get_all(self) -> list[Type[Muenze]]:
         return self._session.query(Muenze).all()
 
-    def get_by_id(self, muenze_id: int) -> Muenze | None:
+    def get_by_id(self, muenze_id: int) -> Optional[Muenze]:
         return (self._session
                 .query(Muenze)
                 .filter(Muenze.id == muenze_id)
+                .first())
+
+    def get_reihenfolge_by_id(self, muenze_id: int) -> Optional[SerieMuenze]:
+        return (self._session
+                .query(SerieMuenze)
+                .filter(SerieMuenze.muenze_id == muenze_id)
                 .first())
 
     def create(self, muenze: Muenze) -> Muenze:
@@ -45,5 +51,5 @@ class MuenzeRepository:
         if not existing_muenze:
             raise ValueError(f"ding")
 
-        self._session.commit()
         self._session.delete(existing_muenze)
+        self._session.commit()

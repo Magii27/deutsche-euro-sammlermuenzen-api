@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, Optional
 from app.core.database import Session
 from app.models import Serie
 
@@ -10,7 +10,7 @@ class SerieRepository:
     def get_all(self) -> list[Type[Serie]]:
         return self._session.query(Serie).all()
 
-    def get_by_id(self, serie_id: int) -> Serie | None:
+    def get_by_id(self, serie_id: int) -> Optional[Serie]:
         return (self._session
                 .query(Serie)
                 .filter(Serie.id == serie_id)
@@ -29,6 +29,10 @@ class SerieRepository:
         if not existing_serie:
             raise ValueError("")
 
+        for key, value in serie.__dict__.items():
+            if key != '_sa_instance_state':
+                setattr(existing_serie, key, value)
+
         self._session.commit()
         self._session.refresh(existing_serie)
 
@@ -40,5 +44,5 @@ class SerieRepository:
         if not existing_serie:
             raise ValueError("")
 
-        self._session.commit()
         self._session.delete(existing_serie)
+        self._session.commit()
