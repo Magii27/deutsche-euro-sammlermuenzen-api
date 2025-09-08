@@ -11,3 +11,4 @@ class Praegung(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     herkunftsbezeichnung = Column(String, nullable=False)
+    standort = Column(String, nullable=False)
