@@ -1,11 +1,37 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Query
+from typing import List, Optional
+from sqlalchemy.orm import Session
 
-muenze_router = APIRouter(prefix="/muenze", tags=["muenze"])
+from app.core.database import get_db
+from app.schemas.muenze_schema import MuenzeSchema, MuenzeCreateSchema, MuenzeUpdateSchema
+from app.repositories.muenze_repository import MuenzeRepository
+
+muenze_router = APIRouter(prefix="/muenzen", tags=["muenzen"])
 
 
-@muenze_router.get("/")
-async def get_muenzen():
-    """
-    Retrieve all muenzen.
-    """
-    return {"message": "List of all muenzen"}
+@muenze_router.get("/", response_model=List[MuenzeSchema])
+async def get_muenzen(
+        serie_id: Optional[int] = None,
+        praegung_id: Optional[int] = None,
+        kuenstler_id: Optional[int] = None,
+        material_id: Optional[int] = None,
+        polymerring: Optional[bool] = None,
+        polymerring_id: Optional[int] = None,
+        db: Session = Depends(get_db)
+):
+    """Alle Münzen + Filtermöglichkeiten"""
+
+    repo = MuenzeRepository(db)
+
+    if polymerring is False and polymerring_id:
+        polymerring = None
+
+    return repo.get_filtered(
+        serie_id=serie_id,
+        praegung_id=praegung_id,
+        kuenstler_id=kuenstler_id,
+        material_id=material_id,
+        polymerring=polymerring,
+        polymerring_id=polymerring_id
+    )
+   

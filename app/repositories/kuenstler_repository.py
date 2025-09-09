@@ -9,7 +9,7 @@ class KuenstlerRepository:
     def __init__(self, session: Session):
         self._session = session
 
-    def get_all(self) -> list[Type[Kuenstler]]:
+    def get_all(self) -> list[Kuenstler]:
         return self._session.query(Kuenstler).all()
 
     def get_by_id(self, kuenstler_id: int) -> Optional[Kuenstler]:

@@ -19,7 +19,7 @@ class PraegungRepository:
                 .first())
 
     def create(self, praegung: Praegung) -> Praegung:
-        self._session.add(Praegung)
+        self._session.add(praegung)
         self._session.commit()
         self._session.refresh(praegung)
 

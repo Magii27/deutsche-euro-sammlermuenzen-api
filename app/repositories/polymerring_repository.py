@@ -31,7 +31,7 @@ class PolymerringRepository:
             raise ValueError("")
 
         for key, value in polymerring.__dict__.items():
-            if key != '_sa_instance_none':
+            if key != '_sa_instance_state':
                 setattr(existing_polymerring, key, value)
 
         self._session.commit()
@@ -39,7 +39,7 @@ class PolymerringRepository:
 
         return existing_polymerring
 
-    def delete(self, polymerring_id: Polymerring) -> None:
+    def delete(self, polymerring_id: int) -> None:
         existing_polymerring = self.get_by_id(polymerring_id)
 
         if not existing_polymerring:

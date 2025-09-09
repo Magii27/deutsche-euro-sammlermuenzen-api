@@ -12,11 +12,11 @@ class PraegungCreateSchema(PraegungBaseSchema):
 
 
 class PraegungUpdateSchema(PraegungBaseSchema):
-    titel: Optional[str] = None
+    herkunftsbezeichnung: Optional[str] = None
     standort: Optional[str] = None
 
 
-class PraegungeSchema(PraegungBaseSchema):
+class PraegungSchema(PraegungBaseSchema):
     id: int
 
     class Config:
