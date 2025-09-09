@@ -1,9 +1,6 @@
-from sqlalchemy import Column, Integer, String, Date, Boolean, Enum, ForeignKey, Float
-from sqlalchemy.orm import relationship
-from datetime import datetime
-import enum
+from sqlalchemy import Column, Integer, String
 
-from app.core.database import Base  # Base kommt aus deinem DB-Setup
+from app.core.database import Base
 
 
 class Kuenstler(Base):

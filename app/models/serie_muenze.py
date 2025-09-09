@@ -1,7 +1,5 @@
-from sqlalchemy import Column, Integer, String, Date, Boolean, Enum, ForeignKey, Float, UniqueConstraint
+from sqlalchemy import Column, Integer, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
-from datetime import datetime
-import enum
 
 from app.core.database import Base  # Base kommt aus deinem DB-Setup
 

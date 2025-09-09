@@ -1,9 +1,6 @@
-from sqlalchemy import Column, Integer, String, Date, Boolean, Enum, ForeignKey, Float
-from sqlalchemy.orm import relationship
-from datetime import datetime
-import enum
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Float
 
-from app.core.database import Base  # Base kommt aus deinem DB-Setup
+from app.core.database import Base
 
 
 class Muenze(Base):
@@ -13,6 +10,7 @@ class Muenze(Base):
     titel = Column(String, nullable=False)
     serie_id = Column(Integer, ForeignKey("t_serie.id"), nullable=False)
     ausgabedatum = Column(Date, nullable=False)
+    nennwert = Column(Float, nullable=True)
     praegung_id = Column(Integer, ForeignKey("t_praegung.id"), nullable=False)
     kuenstler_id = Column(Integer, ForeignKey("t_kuenstler.id"), nullable=False)
     material_id = Column(Integer, ForeignKey("t_material.id"), nullable=False)
