@@ -34,4 +34,14 @@ async def get_muenzen(
         polymerring=polymerring,
         polymerring_id=polymerring_id
     )
-   
+
+
+@muenze_router.get("/{muenze_id}", response_model=MuenzeSchema)
+async def get_muenze_by_id(
+        muenze_id: int,
+        db: Session = Depends(get_db)
+):
+    """Informationen zu einer Münze"""
+    repo = MuenzeRepository(db)
+
+    return repo.get_by_id(muenze_id)
