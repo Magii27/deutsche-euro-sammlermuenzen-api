@@ -43,6 +43,8 @@ class MuenzeRepository:
         if polymerring_id:
             query = query.filter(Muenze.polymerring_id == polymerring_id)
 
+        return query.all()
+
     def get_by_id(self, muenze_id: int) -> Optional[Muenze]:
         return (self._session
                 .query(Muenze)

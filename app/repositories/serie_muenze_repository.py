@@ -15,8 +15,8 @@ class SerieMuenzeRepository:
     def get_muenze_by_serie(self, serie_id: int) -> list[Type[Muenze]]:
         return self._session.query(SerieMuenze).filter(SerieMuenze.serie_id == serie_id).all()
 
-    def get_serie_by_muenze(self, muenze_id: int) -> Serie:
-        return self._session.query(SerieMuenze).filter(SerieMuenze.muenze_id == muenze_id).first().first()
+    def get_serie_by_muenze(self, muenze_id: int) -> Type[Serie]:
+        return self._session.query(SerieMuenze).filter(SerieMuenze.muenze_id == muenze_id).first()
 
     def get_by_id(self, serien_muenze_id: int) -> Optional[SerieMuenze]:
         return (self._session

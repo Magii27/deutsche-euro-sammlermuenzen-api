@@ -6,16 +6,16 @@ class PolymerringBaseSchema(BaseModel):
     farbe: str
 
 
-class PolymerrinCreateSchema(PolymerringBaseSchema):
+class PolymerringCreateSchema(PolymerringBaseSchema):
     pass
 
 
-class PolymerrinUpdateSchema(PolymerringBaseSchema):
+class PolymerringUpdateSchema(PolymerringBaseSchema):
     farbe: Optional[str] = None
 
 
-class PolymerrinSchema(PolymerringBaseSchema):
+class PolymerringSchema(PolymerringBaseSchema):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

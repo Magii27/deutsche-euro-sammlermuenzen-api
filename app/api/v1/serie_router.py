@@ -6,21 +6,21 @@ from app.core.database import get_db
 from app.schemas.serie_schema import SerieSchema
 from app.repositories.serie_repository import SerieRepository
 
-muenze_router = APIRouter(prefix="/serien", tags=["serien"])
+serie_router = APIRouter(prefix="/serien", tags=["serien"])
 
 
-@muenze_router.get("/", response_model=List[SerieSchema])
+@serie_router.get("/", response_model=List[SerieSchema])
 async def get_serien(
         db: Session = Depends(get_db)
 ):
-    """Alle Münzen + Filtermöglichkeiten"""
+    """Alle Serien"""
 
     repo = SerieRepository(db)
 
     return repo.get_all()
 
 
-@muenze_router.get("/{serie_id}", response_model=SerieSchema)
+@serie_router.get("/{serie_id}", response_model=SerieSchema)
 async def get_serie_by_id(
         serie_id: int,
         db: Session = Depends(get_db)

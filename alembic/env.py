@@ -1,10 +1,14 @@
 from logging.config import fileConfig
+import os
+import sys
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-
+from dotenv import load_dotenv
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+load_dotenv()
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -23,9 +27,14 @@ from app.core.database import Base
 
 target_metadata = Base.metadata
 
-from app.core.config import config as db_config
+from app.core.config import Settings
 
-config.set_main_option('sqlalchemy.url', db_config.get("database_url"))
+db_config = Settings()
+
+db_url = f"postgresql://{db_config.DB_USERNAME}:{db_config.DB_PASSWORD}@{db_config.DB_HOST}:{db_config.DB_PORT}/{db_config.DB_NAME}"
+
+config.set_main_option('sqlalchemy.url', db_url)
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

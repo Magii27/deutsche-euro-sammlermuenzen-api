@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends
 from typing import List, Optional
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.schemas.muenze_schema import MuenzeSchema, MuenzeCreateSchema, MuenzeUpdateSchema
+from app.schemas.muenze_schema import MuenzeSchema
 from app.repositories.muenze_repository import MuenzeRepository
 
 muenze_router = APIRouter(prefix="/muenzen", tags=["muenzen"])

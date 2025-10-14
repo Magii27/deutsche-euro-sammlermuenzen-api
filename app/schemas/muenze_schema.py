@@ -5,7 +5,6 @@ from typing import Optional
 
 class MuenzeBaseSchema(BaseModel):
     titel: str
-    serie_id: int
     ausgabedatum: date
     praegung_id: int
     kuenstler_id: int
@@ -21,8 +20,8 @@ class MuenzeCreateSchema(MuenzeBaseSchema):
 
 class MuenzeUpdateSchema(MuenzeBaseSchema):
     titel: Optional[str] = None
-    serie_id: Optional[int] = None
     ausgabedatum: Optional[date] = None
+    nennwert: Optional[float] = None
     praegung_id: Optional[int] = None
     kuenstler_id: Optional[int] = None
     material_id: Optional[int] = None
@@ -35,4 +34,4 @@ class MuenzeSchema(MuenzeBaseSchema):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

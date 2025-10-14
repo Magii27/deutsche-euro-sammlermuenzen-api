@@ -5,7 +5,7 @@ from typing import Optional
 class SerieMuenzeBaseSchema(BaseModel):
     serie_id: int
     muenze_id: int
-    reihenfolge: str
+    reihenfolge: int
 
 
 class SerieMuenzeCreateSchema(SerieMuenzeBaseSchema):
@@ -15,11 +15,11 @@ class SerieMuenzeCreateSchema(SerieMuenzeBaseSchema):
 class SerieMuenzeUpdateSchema(SerieMuenzeBaseSchema):
     serie_id: Optional[int] = None
     muenze_id: Optional[int] = None
-    reihenfolge: Optional[str] = None
+    reihenfolge: Optional[int] = None
 
 
 class SerieMuenzeSchema(SerieMuenzeBaseSchema):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
